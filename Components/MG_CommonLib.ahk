@@ -127,6 +127,8 @@ _OnErrDlgClipboard(errorMsg, guiObj, Info) {
 ;-------------------------------------------------------------------------------
 MG_EditUserExtension(bMG_Edit, editorPath:="")
 {
+	global MG_ScriptEditor
+
 	scriptPath := MG_DirConfig (bMG_Edit ? "ME_UserExtension.ahk" : "MG_UserExtension.ahk")
 
 	if (!FileExist(scriptPath)) {
@@ -151,7 +153,7 @@ MG_EditUserExtension(bMG_Edit, editorPath:="")
 
 		FileAppend(userScript, scriptPath, "UTF-8")
 	}
-	editorPath := (editorPath != "") ? editorPath : (MG_ScriptEditor?)
+	editorPath := (editorPath != "") ? editorPath : (IsSet(MG_ScriptEditor) ? MG_ScriptEditor : "")
 	if (editorPath != "") {
 		editorPath := "`"" editorPath "`""
 	} else {
