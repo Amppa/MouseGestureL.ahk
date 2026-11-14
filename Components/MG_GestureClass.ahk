@@ -668,7 +668,7 @@ class GestureClass
 		{
 			; Movement exceeding the threshold distance has been detected
 			if (this.opt._b8DirMode) {
-				angle := Abs(this._90degrees - Abs(ATan((nowX-this._prevX) / (nowY-this._prevY))))
+				angle := (powy == 0) ? this._90degrees : Abs(this._90degrees - Abs(ATan((nowX-this._prevX) / (nowY-this._prevY))))
 				if (this._angleThreshold > angle) {
 					dir := (nowX > this._prevX) ? ((nowY > this._prevY) ? 3 : 9)
 												: ((nowY > this._prevY) ? 1 : 7)
