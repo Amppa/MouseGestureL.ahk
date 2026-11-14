@@ -2471,6 +2471,9 @@ ME_PasteKeyPressed()
 ME_EnterKeyPressed()
 {
 	focused := ME_MainDlg.FocusedCtrl
+	if (focused == ME_EGestureName && ME_IsImeComposing(focused.Hwnd)) {
+		return
+	}
 
 	if (GetKeyState("Ctrl")
 	&&	(focused==ME_LVMain || focused==ME_EAction)) {
@@ -2498,6 +2501,27 @@ ME_EnterKeyPressed()
 	else if (focused == ME_EGestureName) {
 		ME_EGestureNameApply("EnterKey")
 	}
+}
+
+;-------------------------------------------------------------------------------
+; Check whether the edit control is composing text through an IME
+;-------------------------------------------------------------------------------
+ME_IsImeComposing(hwnd)
+{
+	hIMC := DllCall("imm32\ImmGetContext", "Ptr", hwnd, "Ptr")
+	if (!hIMC) {
+		return false
+	}
+
+	; GCS_COMPSTR = 0x0008
+	size := DllCall("imm32\ImmGetCompositionStringW"
+					, "Ptr", hIMC
+					, "UInt", 0x0008
+					, "Ptr", 0
+					, "UInt", 0
+					, "Int")
+	DllCall("imm32\ImmReleaseContext", "Ptr", hwnd, "Ptr", hIMC)
+	return size > 0
 }
 
 ;-------------------------------------------------------------------------------
