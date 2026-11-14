@@ -1674,8 +1674,8 @@ _AddCommonControls()
 	ME_VariablePos.Push(ctrl)
 
 	btnW:=80, spc:=6
-	btnX := tabR - (130 + btnW*2 + spc*2)
-	ctrl := ME_MainDlg.Add("Button", "x" btnX " y" cy " w130 h24", ME_LngButton003)
+	btnX := tabR - (btnW*3 + spc*2)
+	ctrl := ME_MainDlg.Add("Button", "x" btnX " y" cy " w" btnW " h24", ME_LngButton003)
 	ctrl.OnEvent("Click", MG_ShowHelp)
 	ME_VariablePos.Push(ctrl)
 
