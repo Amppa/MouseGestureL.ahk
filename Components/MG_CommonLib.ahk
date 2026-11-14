@@ -224,7 +224,8 @@ MG_CheckConfigFiles()
 MG_CheckLanguage(bChoose:=false)
 {
 	static tblLang := [ { file: "Japanese.ahk", lcids: [ "0411" ] }
-					  , { file: "Chinese.ahk" , lcids: [ "0804", "0C04", "1004", "0404", "1404" ] } ]
+					  , { file: "zh-TW.ahk"   , lcids: [ "0404", "0C04", "1404" ] }
+					  , { file: "Chinese.ahk" , lcids: [ "0804", "1004" ] } ]
 
 	; Create the config folder
 	if (FileExist(MG_DirConfig) != "D") {
